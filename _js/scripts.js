@@ -53,8 +53,8 @@ var mdl = require('material-design-lite');
         var icons = shuffle([].slice.call(document.querySelectorAll('.icon-canvas .mdi')));
         var radius = (document.getElementsByClassName('content')[0].offsetWidth / 2) + 100;
         var middlepoint = {
-            x: bodyWidth / 2,
-            y: bodyHeight / 2
+            x: bodyWidth / 2 - 20,
+            y: bodyHeight / 2 - 20
         };
         positionNodesCircles(icons, radius, middlepoint, 8, 3, Math.max(bodyWidth,bodyHeight) / 10);
     }
