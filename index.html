@@ -4,7 +4,6 @@ permalink: /index.html
 ---
 
 <div class="wrapper">
-
     <div class="icon-canvas">
         {% for icon in site.data.icons %}
             {% for i in (1..icon.quantity) %}
@@ -26,9 +25,7 @@ permalink: /index.html
         </ul>
     </div>
 
-
-
-    <div class="content">
+    <div id="content" class="content">
         <h1>{{ site.title }}</h1>
         <p>IT Student and (frontend) Webdeveloper.</p>
         <ul class="socialicons">
@@ -36,26 +33,27 @@ permalink: /index.html
                 <a href="https://github.com/{{ site.github_username }}">
                   <i class="mdi mdi-github-circle"></i>
                 </a>
+                <div class="mdl-tooltip" for="github">
+                    Github
+                </div>
             </li>
-            <div class="mdl-tooltip" for="github">
-                Github
-            </div>
             <li id="email">
                 <a href="mailto:{{ site.email }}">
                     <i class="mdi mdi-email"></i>
                 </a>
+                <div class="mdl-tooltip" for="email">
+                    Email
+                </div>
             </li>
-            <div class="mdl-tooltip" for="email">
-                Email
-            </div>
+            
             <li id="cv">
-                <a href="{{ "/assets/cv.pdf" | prepend: site.baseurl }}">
+                <a href="https://s.eliasmei.re/cv.pdf">
                     <i class="mdi mdi-file-check"></i>
                 </a>
+                <div class="mdl-tooltip" for="cv">
+                    Download CV
+                </div>
             </li>
-            <div class="mdl-tooltip" for="cv">
-                Download CV
-            </div>
         </ul>
     </div>
 </div>
