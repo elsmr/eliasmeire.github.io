@@ -11,6 +11,8 @@ var mdl = require('material-design-lite');
         bodyHeight = document.body.offsetHeight;
         exploded = true;
 
+        document.getElementById('content').className += ' fadein';
+
         document.getElementById('implodeexplode').addEventListener('click', function() {
             if(exploded) {
                 this.innerHTML = 'Explode';
