@@ -21,5 +21,3 @@ exclude:
   - README.md
   - package.json
   - gulpfile.js
-  - .gitignore
-  
