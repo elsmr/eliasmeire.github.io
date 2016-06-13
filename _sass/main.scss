@@ -64,7 +64,7 @@ p {
     }
   }
 
-  div +li {
+  li + li {
     margin-left: 0.5em;
   }
 
@@ -77,7 +77,6 @@ p {
 .content {
   opacity: 0;
   z-index: 2;
-  animation: fadein 0.5s ease-in-out 0.2s forwards;
 }
 
 .fadein {
@@ -94,5 +93,5 @@ p {
 
 .colorshift {
   opacity: 1 !important;
-  animation: colorshift 5s infinite;
+  animation: colorshift 1s infinite;
 }

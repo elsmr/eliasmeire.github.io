@@ -1,15 +1,3 @@
-@keyframes float {
-  0%, 100% {
-    transform: rotate(0deg);
-  }
-
-  50% {
-    top: 70%;
-    left: 40%;
-    transform: rotate(20deg);
-  }
-}
-
 @keyframes fadein {
   0% {
     opacity: 0;
@@ -56,27 +44,23 @@
 
 @keyframes colorshift {
   0% {
-  	font-size: 4em;
     color: palette(Red);
   }
 
   30% {
-  	font-size: 3em;
   	color: palette(Blue, 700);
   }
 
   50% {
-  	font-size: 4em;
-    color: palette(Cyan, A400);
+    color: palette(Amber);
+    
   }
 
   70% {
-  	font-size: 3em;
-  	color: palette(Amber);
+    color: palette(Cyan, A400);
   }
 
   100% {
-  	font-size: 4em;
   	color: palette(Light Green);
   }
 }
