@@ -1,0 +1,15 @@
+---
+layout: compress
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<html>
+
+	{% include head.html %}
+
+	<body>
+		{{ content }}
+		<script src="{{ "/js/scripts.min.js" | prepend: site.baseurl }}"></script>
+	</body>
+</html>

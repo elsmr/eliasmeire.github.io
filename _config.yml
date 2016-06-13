@@ -1,0 +1,25 @@
+# Site settings
+title: Elias Meire
+author: Elias Meire
+email: me@eliasmei.re
+description: "Personal website of Elias Meire"
+github_username:  eliasmeire
+primary_color: '#212121'
+sass:
+  style: compressed
+  load_paths:
+    - _sass
+    - node_modules
+collections:
+  favicon:
+    output: true
+    permalink: /
+compress_html:
+  comments: all
+  clippings: all
+exclude:
+  - README.md
+  - package.json
+  - gulpfile.js
+  - .gitignore
+  

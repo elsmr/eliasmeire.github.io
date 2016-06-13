@@ -1,0 +1,71 @@
+# general
+
+- icon: flash
+  quantity: 5
+
+- icon: ghost
+  quantity: 3
+
+- icon: headphones
+  quantity: 3
+
+- icon: cloud
+  quantity: 3
+
+- icon: google-controller
+  quantity: 2
+
+- icon: cellphone
+  quantity: 2
+
+- icon: laptop
+  quantity: 2
+
+# programming
+
+- icon: language-javascript
+  quantity: 5
+
+- icon: language-css3
+  quantity: 3
+
+- icon: language-csharp
+  quantity: 2
+
+- icon: language-html5
+  quantity: 3
+
+- icon: markdown
+  quantity: 2
+
+- icon: json
+  quantity: 2
+
+- icon: xml
+  quantity: 3
+
+- icon: console
+  quantity: 3
+
+- icon: code-brackets
+  quantity: 2
+
+# technology
+
+- icon: android
+  quantity: 4
+
+- icon: memory
+  quantity: 2
+
+- icon: polymer
+  quantity: 3
+
+- icon: linux
+  quantity: 2
+
+- icon: github-circle
+  quantity: 3
+
+- icon: git
+  quantity: 2

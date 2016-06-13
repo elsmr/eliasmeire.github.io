@@ -1,0 +1,91 @@
+.icon-canvas {
+  position: fixed;
+  background-color: palette(Grey, 900);
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  
+  .mdi {
+    font-size: 2em;
+    transition: all 1.5s ease-in-out;
+    position: absolute;
+    opacity: 0;
+    top: 50%;
+    left: 50%;
+  }
+
+  .mdi-android {
+    color: palette(Green, 400);
+  }
+  .mdi-polymer {
+    color: palette(Pink, 400);
+  }
+  .mdi-flash {
+    color: palette(Yellow, 600);
+  }
+  .mdi-language-javascript {
+    color: palette(Yellow, 500);
+  }
+  .mdi-json {
+    color: palette(Purple, A200);
+  }
+  .mdi-cloud {
+    color: palette(Light Blue, 400);
+  }
+  .mdi-git {
+    color: palette(Deep Orange, 500);
+  }
+  .mdi-language-csharp {
+    color: palette(Blue, 500);
+  }
+  .mdi-language-html5 {
+    color: palette(Orange, 700);
+  }
+  .mdi-console {
+    color: palette(Teal, A400);
+  }
+  .mdi-linux {
+    color: palette(Blue, 400);
+  }
+  .mdi-code-brackets {
+    color: palette(Deep Purple, A100);
+  }
+  .mdi-google-controller {
+    color: palette(Light Green, 500);
+  }
+  .mdi-headphones {
+    color: palette(Orange, A400);
+  }
+  .mdi-language-css3 {
+    color: palette(Light Blue, A700);
+  }
+  .mdi-markdown {
+    color: palette(Red, A200);
+  }
+  .mdi-xml {
+    color: palette(Light Blue, 500);
+  }
+  .mdi-memory {
+    color: palette(Green, A400);
+  }
+  .mdi-laptop {
+    color: palette(Blue Grey, 200);
+  }
+  .mdi-cellphone {
+    color: palette(Red, 800);
+  }
+  .mdi-ghost:hover {
+    cursor: pointer;
+  }
+}
+
+.mdl-tooltip {
+  background-color: palette(Grey, 300);
+  color: palette(Grey, 800);
+}
+
+.mdl-menu__item a {
+  color: inherit;
+  text-decoration: none;
+}
