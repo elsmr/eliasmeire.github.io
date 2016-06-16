@@ -25,17 +25,23 @@ mkdir ../eliasmeire.github.io.${TARGET_BRANCH}
 # clone into target folder
 git clone $REPO ../eliasmeire.github.io.${TARGET_BRANCH}
 
+# go to target folder
+cd ../eliasmeire.github.io.${TARGET_BRANCH}
+
+# go to target branch
+git checkout $TARGET_BRANCH || git checkout --orphan $TARGET_BRANCH
+
+# go back to original folder
+cd ../eliasmeire.github.io
+
 # build site, stored in dist folder
 gulp build
 
 # copy dist folder to new folder
 cp -R ${DIST_FOLDER}/* ../eliasmeire.github.io.${TARGET_BRANCH}
 
-# go to new folder
+# go to target folder
 cd ../eliasmeire.github.io.${TARGET_BRANCH}
-
-# go to target branch
-git checkout $TARGET_BRANCH || git checkout --orphan $TARGET_BRANCH
 
 # git configuration
 git config user.email "eliasmeire.dbz@gmail.com"
