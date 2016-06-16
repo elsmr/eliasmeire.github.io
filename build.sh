@@ -14,20 +14,28 @@ fi
 # enable error reporting to the console
 set -e
 
+REPO=`git config remote.origin.url`
+
+# clean
+rm -rf ../eliasmeire.github.io.${TARGET_BRANCH}
+
+# make new folder for generated files
+mkdir ../eliasmeire.github.io.${TARGET_BRANCH}
+
+# clone into target folder
+git clone $REPO ../eliasmeire.github.io.${TARGET_BRANCH}
+
 # build site, stored in dist folder
 gulp build
 
-# clean
-rm -rf ../eliasmeire.github.io.target
-
-# make new folder for generated files
-mkdir ../eliasmeire.github.io.target
-
 # copy dist folder to new folder
-cp -R _site/* ../eliasmeire.github.io.target
+cp -R ${DIST_FOLDER}/* ../eliasmeire.github.io.${TARGET_BRANCH}
 
 # go to new folder
-cd ../eliasmeire.github.io.target
+cd ../eliasmeire.github.io.${TARGET_BRANCH}
+
+# go to target branch
+git checkout $TARGET_BRANCH || git checkout --orphan $TARGET_BRANCH
 
 # git configuration
 git config user.email "eliasmeire.dbz@gmail.com"
