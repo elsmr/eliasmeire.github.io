@@ -6,8 +6,10 @@ var mdl = require('material-design-lite');
     var resizeTimer;
     var bodyWidth, bodyHeight;
     var exploded;
+    var icons;
 
     window.addEventListener('load',function() {
+        icons = shuffle([].slice.call(document.querySelectorAll('.icon-canvas .mdi')));
         bodyWidth = document.body.offsetWidth;
         bodyHeight = document.body.offsetHeight;
         exploded = true;
@@ -15,27 +17,32 @@ var mdl = require('material-design-lite');
         document.getElementById('content').className += ' fadein';
 
         document.getElementById('implodeexplode').addEventListener('click', function() {
-            if(exploded) {
-                this.innerHTML = 'Explode';
+            if(exploded) {                
                 implodeIcons();
+                var button = this;
+                setTimeout(function() {
+                    button.textContent = 'Explode';
+                }, 250);
             } else {
-                this.innerHTML = 'Implode';
                 explodeIcons();
+                var button = this;
+                setTimeout(function() {
+                    button.textContent = 'Implode';
+                }, 250);
             } 
 
             exploded = !exploded;
         });
         
 
-        var ghosts = [].slice.call(document.querySelectorAll('.mdi-ghost'));
-        ghosts.forEach(function (ghost) {
-            ghost.addEventListener('click', function(e) {
-                this.className += ' colorshift';
-                this.style.opacity = 1;
-                this.style.cursor = 'default';
-                e.target.removeEventListener(e.type, null);
-            });
-        });
+        // var ghosts = [].slice.call(document.querySelectorAll('.mdi-ghost'));
+        // ghosts.forEach(function (ghost) {
+        //     ghost.addEventListener('click', function(e) {
+        //         this.style.animation += ', colorshift 5s infinite';
+        //         this.style.cursor = 'default';
+        //         e.target.removeEventListener(e.type, null);
+        //     });
+        // });
 
         positionIcons();
     });
@@ -44,6 +51,7 @@ var mdl = require('material-design-lite');
         // Only trigger this when done resizing
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(function() {
+            icons = shuffle(icons);
             bodyWidth = document.body.offsetWidth;
             bodyHeight = document.body.offsetHeight;
             positionIcons();
@@ -51,34 +59,23 @@ var mdl = require('material-design-lite');
     });
 
     var positionIcons = function() {
-        var icons = shuffle([].slice.call(document.querySelectorAll('.icon-canvas .mdi')));
         var radius = (document.getElementsByClassName('content')[0].offsetWidth / 2) +  50 + Math.max(bodyWidth,bodyHeight) / 10;
-        positionNodesCircles(icons, radius, 8, 3, 100 + Math.max(bodyWidth,bodyHeight) / 20);
+        positionNodesCircles(icons.slice(0), radius, 8, 3, 100 + Math.max(bodyWidth,bodyHeight) / 20);
     }
 
     var implodeIcons = function() {
-        var icons = document.querySelectorAll('.icon-canvas .mdi');
         for (var i = icons.length - 1; i >= 0; i--) {
             icons[i].style.opacity = 1;
-            icons[i].className = icons[i].className.replace(/\b fadein\b/,'');
-            icons[i].className = icons[i].className.replace(/\b implode\b/,'');
-            icons[i].className = icons[i].className.replace(/\b explode\b/,'');
-            var clone = icons[i].cloneNode(true);
-            icons[i].parentNode.replaceChild(clone, icons[i]);
-            clone.className += ' implode';
+            icons[i].className = icons[i].className.replace(/\b fadein\b/,'').replace(/\b implode\b/,'').replace(/\b explode\b/,'');
+            icons[i].className += ' implode';
         }
     }
 
     var explodeIcons = function() {
-        var icons = document.querySelectorAll('.icon-canvas .mdi');
         for (var i = icons.length - 1; i >= 0; i--) {
             icons[i].style.opacity = 0;
-            icons[i].className = icons[i].className.replace(/\b fadein\b/,'');
-            icons[i].className = icons[i].className.replace(/\b implode\b/,'');
-            icons[i].className = icons[i].className.replace(/\b explode\b/,'');
-            var clone = icons[i].cloneNode(true);
-            icons[i].parentNode.replaceChild(clone, icons[i]);
-            clone.className += ' explode';
+            icons[i].className = icons[i].className.replace(/\b fadein\b/,'').replace(/\b implode\b/,'').replace(/\b explode\b/,'');
+            icons[i].className += ' explode';
         }
     }
 
@@ -133,7 +130,7 @@ var mdl = require('material-design-lite');
      * @param {number} interCircleDistance - The distance between two circles.
      */
     var positionNodesCircles = function(nodes, radius, nodesPerCircle, nodesPerCircleRandom, interCircleDistance) {
-        var node, nodesOnCircle, circleCoord, random, theta = 0;
+        var node, nodesOnCircle, circleCoord, transform, random, theta = 0;
 
         while(nodes.length > 0) {
             nodesOnCircle = nodesPerCircle + Math.random() * nodesPerCircleRandom;
@@ -144,7 +141,9 @@ var mdl = require('material-design-lite');
                 node = [].pop.call(nodes);
                 circleCoord = circleCoords(radius, theta);
 
-                setVendor(node, 'Transform','translate3d('  + (circleCoord.x - node.offsetWidth/2) + 'px,' + (circleCoord.y - node.offsetHeight/2) +'px,0) scale(' + (1 + (random * 1.2)) + ')');
+                transform = 'translate3d('  + (circleCoord.x - node.offsetWidth/2) + 'px,' + (circleCoord.y - node.offsetHeight/2) +'px,0px) scale(' + (1 + (random * 1.2)) + ')';
+                node.style.transform = transform;
+                setVendor(node, 'Transform', transform);
                 if(node.className.indexOf('fadein') == -1) node.className += ' fadein';
                 theta += (6.283 / (nodesOnCircle + 1)) + ((random * 0.2) - 0.1);
                 if(nodes.length == 0) return;

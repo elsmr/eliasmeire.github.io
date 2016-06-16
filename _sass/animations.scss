@@ -19,17 +19,17 @@
 
   100% {
     opacity: 0;
-    transform: translate3d(50%,50%,0);
+    transform: translate3d(0px,0px,0px);
   }
 }
 
 @keyframes explode {
   0% {
     opacity: 0;
-    transform: translate3d(50%,50%,0);
+    transform: translate3d(0px,0px,0px);
   }
 
-  40% {
+  30% {
   	opacity: 0;
   }
 
