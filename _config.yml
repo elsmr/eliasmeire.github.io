@@ -22,3 +22,4 @@ exclude:
   - README.md
   - package.json
   - gulpfile.js
+  - build.sh
