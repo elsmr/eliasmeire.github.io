@@ -1,7 +1,7 @@
 # general
 
 - icon: flash
-  quantity: 5
+  quantity: 3
 
 - icon: ghost
   quantity: 3
@@ -10,15 +10,18 @@
   quantity: 3
 
 - icon: cloud
-  quantity: 3
+  quantity: 2
 
 - icon: google-controller
   quantity: 2
 
 - icon: cellphone
-  quantity: 2
+  quantity: 1
 
 - icon: laptop
+  quantity: 2
+
+- icon: rocket
   quantity: 2
 
 # programming
@@ -30,7 +33,7 @@
   quantity: 3
 
 - icon: language-csharp
-  quantity: 2
+  quantity: 3
 
 - icon: language-html5
   quantity: 3
@@ -45,10 +48,10 @@
   quantity: 3
 
 - icon: console
-  quantity: 3
+  quantity: 2
 
 - icon: code-brackets
-  quantity: 2
+  quantity: 1
 
 # technology
 
@@ -59,13 +62,13 @@
   quantity: 2
 
 - icon: polymer
-  quantity: 3
+  quantity: 2
 
 - icon: linux
   quantity: 2
 
 - icon: github-circle
-  quantity: 3
+  quantity: 1
 
 - icon: git
   quantity: 2
