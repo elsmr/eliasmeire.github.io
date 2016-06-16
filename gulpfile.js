@@ -129,6 +129,13 @@ gulp.task('clean', function () {
 });
 
 /**
+ * Build project (without browser-sync/watch)
+ */
+gulp.task('build', function() {
+    runSequence('clean','jekyll-build', 'js', ['copy-iconfont', 'images', 'sass']);
+});
+
+/**
  * Default task, running just `gulp` will compile the sass,
  * compile the jekyll site, launch BrowserSync & watch files.
  */

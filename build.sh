@@ -10,7 +10,7 @@ fi
 set -e
 
 # build site, stored in '_site' folder
-gulp
+gulp build
 
 # cleanup
 rm -rf ../eliasmeire.github.io.master
