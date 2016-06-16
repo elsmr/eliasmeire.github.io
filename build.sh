@@ -1,31 +1,41 @@
 #!/bin/bash
 
+SOURCE_BRANCH="develop"
+TARGET_BRANCH="master"
+GH_REF="github.com/eliasmeire/eliasmeire.github.io"
+DIST_FOLDER="_site"
+
 # only proceed script when started not by pull request (PR)
 if [ $TRAVIS_PULL_REQUEST == "true" ]; then
-  echo "this is PR, exiting"
+  echo "this is a PR, exiting"
   exit 0
 fi
 
 # enable error reporting to the console
 set -e
 
-# build site, stored in '_site' folder
+# build site, stored in dist folder
 gulp build
 
-# cleanup
-rm -rf ../eliasmeire.github.io.master
+# clean
+rm -rf ../eliasmeire.github.io.${TARGET_BRANCH}
 
-#clone `master' branch of the repository using encrypted GH_TOKEN for authentification
-git clone https://${GH_TOKEN}@github.com/eliasmeire/eliasmeire.github.io.git ../eliasmeire.github.io.master
+# make new folder for generated files
+mkdir ../eliasmeire.github.io.${TARGET_BRANCH}
 
-# copy generated HTML site to `master' branch
-cp -R _site/* ../eliasmeire.github.io.master
+# copy dist folder to new folder
+cp -R ${DIST_FOLDER}/* ../eliasmeire.github.io.${TARGET_BRANCH}
 
-# commit and push generated content to `master' branch
-# since repository was cloned in write mode with token auth - we can push there
-cd ../eliasmeire.github.io.master
+# go to new folder
+cd ../eliasmeire.github.io.${TARGET_BRANCH}
+
+# git configuration
 git config user.email "eliasmeire.dbz@gmail.com"
 git config user.name "Eliasbot"
+
+# add and commit
 git add -A .
-git commit -a -m "Build from develop branch | Deployed by TravisCI #$TRAVIS_BUILD_NUMBER"
-git push --quiet origin master > /dev/null 2>&1
+git commit -am "Build from ${SOURCE_BRANCH} branch | Deployed by TravisCI (Build #$TRAVIS_BUILD_NUMBER)"
+
+# force push to github
+git push -f "https://${GH_TOKEN}@${GH_REF}" ${TARGET_BRANCH} > /dev/null 2>&1
