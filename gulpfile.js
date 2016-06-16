@@ -17,14 +17,16 @@ var jekyll   = process.platform === 'win32' ? 'jekyll.bat' : 'jekyll';
 var paths    = {
     html: ['*.html', '_layouts/*.html', '_includes/*.html'],
     jekyll: ['_data/*.*', '_config.yml'],
-    sass: ['_sass/**/*.scss', '_css/**/*.scss'],
-    sass_main: '_css/**/*.scss',
+    sass: ['_sass/**/*.scss'],
+    sass_main: '_sass/main.scss',
     js: '_js/**/*.js',
+    purify_src: ['_site/*.html','_site/js/scripts.min.js'],
     images: '_images/**/*.+(png|jpg|jpeg|gif|svg)',
     dist: '_site'
 }
 var messages = {
-    jekyllBuild: 'jekyll build running'
+    jekyllBuild: 'Jekyll build running',
+    clean: 'Cleaning project'
 };
 
 /**
@@ -62,7 +64,7 @@ gulp.task('sass', function () {
         .pipe(sass().on('error', sass.logError))
         .pipe(concat('main.min.css'))
         .pipe(cssImport())
-        //.pipe(purify(['*.html', '_layouts/*.html', '_includes/*.html', '_site/js/**/*.js']))
+        .pipe(purify(paths.purify_src))
         .pipe(prefix(['last 15 versions', '> 1%', 'ie 8', 'ie 7'], { cascade: true }))
         .pipe(cssnano({
             discardComments: {
@@ -89,7 +91,7 @@ gulp.task('js', function () {
  */
 gulp.task('images', function(){
   return gulp.src(paths.images)
-  .pipe(cache(imagemin()))
+  .pipe(cache(imagemin({ optimizationLevel: 5, progressive: true})))
   .pipe(gulp.dest(paths.dist + '/img'))
 });
 
@@ -105,8 +107,16 @@ gulp.task('watch', function () {
         runSequence('sass', 'reload');
     });
     gulp.watch([paths.html, paths.jekyll], function() {
-        runSequence('jekyll-build', ['js', 'sass'], 'reload');
+        runSequence('jekyll-build', 'js', 'sass', 'reload');
     });
+});
+
+/**
+ * Clean project (delete _site folder etc.)
+ */
+gulp.task('clean', function () {
+    browserSync.notify(messages.clean);
+    return cp.spawn(jekyll , ['clean'], {stdio: 'inherit'});
 });
 
 /**
@@ -114,5 +124,5 @@ gulp.task('watch', function () {
  * compile the jekyll site, launch BrowserSync & watch files.
  */
 gulp.task('default', function() {
-    runSequence('jekyll-build', ['images', 'js', 'sass','browser-sync'], 'watch');
+    runSequence('clean','jekyll-build', 'js', ['images', 'sass', 'browser-sync'], 'watch');
 });
