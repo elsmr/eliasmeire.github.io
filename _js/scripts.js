@@ -2,6 +2,7 @@ var mdl = require('material-design-lite');
 
 (function() {
     'use strict';
+
     var resizeTimer;
     var bodyWidth, bodyHeight;
     var exploded;
@@ -24,17 +25,15 @@ var mdl = require('material-design-lite');
 
             exploded = !exploded;
         });
-    
+        
+
         var ghosts = [].slice.call(document.querySelectorAll('.mdi-ghost'));
         ghosts.forEach(function (ghost) {
-            ghost.addEventListener('click', function() {
-                if(this.className.indexOf('colorshift') > -1) {
-                    this.className = this.className.replace(/\b colorshift\b/,'');
-                    this.className += ' fadein';                
-                } else {
-                    this.className = this.className.replace(/\b fadein\b/,'');
-                    this.className += ' colorshift';
-                }
+            ghost.addEventListener('click', function(e) {
+                this.className += ' colorshift';
+                this.style.opacity = 1;
+                this.style.cursor = 'default';
+                e.target.removeEventListener(e.type, null);
             });
         });
 
@@ -53,12 +52,8 @@ var mdl = require('material-design-lite');
 
     var positionIcons = function() {
         var icons = shuffle([].slice.call(document.querySelectorAll('.icon-canvas .mdi')));
-        var radius = (document.getElementsByClassName('content')[0].offsetWidth / 2) + 100;
-        var middlepoint = {
-            x: bodyWidth / 2 - 20,
-            y: bodyHeight / 2 - 20
-        };
-        positionNodesCircles(icons, radius, middlepoint, 8, 3, Math.max(bodyWidth,bodyHeight) / 10);
+        var radius = (document.getElementsByClassName('content')[0].offsetWidth / 2) +  50 + Math.max(bodyWidth,bodyHeight) / 10;
+        positionNodesCircles(icons, radius, 8, 3, 100 + Math.max(bodyWidth,bodyHeight) / 20);
     }
 
     var implodeIcons = function() {
@@ -68,9 +63,9 @@ var mdl = require('material-design-lite');
             icons[i].className = icons[i].className.replace(/\b fadein\b/,'');
             icons[i].className = icons[i].className.replace(/\b implode\b/,'');
             icons[i].className = icons[i].className.replace(/\b explode\b/,'');
-            var newone = icons[i].cloneNode(true);
-            icons[i].parentNode.replaceChild(newone, icons[i]);
-            newone.className += ' implode';
+            var clone = icons[i].cloneNode(true);
+            icons[i].parentNode.replaceChild(clone, icons[i]);
+            clone.className += ' implode';
         }
     }
 
@@ -81,16 +76,29 @@ var mdl = require('material-design-lite');
             icons[i].className = icons[i].className.replace(/\b fadein\b/,'');
             icons[i].className = icons[i].className.replace(/\b implode\b/,'');
             icons[i].className = icons[i].className.replace(/\b explode\b/,'');
-            var newone = icons[i].cloneNode(true);
-            icons[i].parentNode.replaceChild(newone, icons[i]);
-            newone.className += ' explode';
+            var clone = icons[i].cloneNode(true);
+            icons[i].parentNode.replaceChild(clone, icons[i]);
+            clone.className += ' explode';
         }
+    }
+
+    /**
+     * Applies property to node with vendor prefixes
+     * @param {object} node - The node to apply the property to.
+     * @param {string} property - The property that needs to be applied.
+     * @param {string} value - The value of the property.
+     */
+    var setVendor = function(node, property, value) {
+      node.style["webkit" + property] = value;
+      node.style["moz" + property] = value;
+      node.style["ms" + property] = value;
+      node.style["o" + property] = value;
     }
 
     /**
      * Shuffles items in an array
      * @param {array} array - The array to shuffle.
-     * @return {array} array - The shuffled array.
+     * @return {array} - The shuffled array.
      */
     var shuffle = function(array)
     {
@@ -104,15 +112,14 @@ var mdl = require('material-design-lite');
     }
 
     /**
-     * Shuffles items in an array
+     * Calculates the coordinates of a point on a circle
      * @param {number} radius - The radius of the circle.
-     * @param {object} middlepoint - The middlepoint of the circle (x,y).
-     * @param {number} theta - rotation angle (radians)
+     * @param {number} theta - The rotation angle (radians).
      */
-    var circleCoords = function(radius, middlepoint, theta) {
+    var circleCoords = function(radius, theta) {
         return {
-            x: middlepoint.x + radius * Math.cos(theta),
-            y: middlepoint.y + radius * Math.sin(theta)
+            x: radius * Math.cos(theta),
+            y: radius * Math.sin(theta)
         }
     }
 
@@ -125,8 +132,8 @@ var mdl = require('material-design-lite');
      * @param {number} nodesPerCircleRandom - The random factor for the number of nodes per circle.
      * @param {number} interCircleDistance - The distance between two circles.
      */
-    var positionNodesCircles = function(nodes, radius, middlepoint, nodesPerCircle, nodesPerCircleRandom, interCircleDistance) {
-        var node, nodesOnCircle, circleCoord, deg, random, theta = 0;
+    var positionNodesCircles = function(nodes, radius, nodesPerCircle, nodesPerCircleRandom, interCircleDistance) {
+        var node, nodesOnCircle, circleCoord, random, theta = 0;
 
         while(nodes.length > 0) {
             nodesOnCircle = nodesPerCircle + Math.random() * nodesPerCircleRandom;
@@ -135,20 +142,15 @@ var mdl = require('material-design-lite');
             for (var i =  nodesOnCircle; i >= 0; i--) {
                 random = Math.random();
                 node = [].pop.call(nodes);
-                circleCoord = circleCoords(radius, middlepoint, theta);
-                deg = random * 180;
+                circleCoord = circleCoords(radius, theta);
 
-                node.className = node.className.replace(/\b fadein\b/,'');
-                node.className = node.className.replace(/\b fadeout\b/,'');
-                node.style.left = circleCoord.x + 'px';
-                node.style.top = circleCoord.y + 'px';
-                node.style.fontSize = 1 + random * 3.2 + 'em';
-                node.className += ' fadein';
-                theta += (6.283 / (nodesOnCircle + 1)) + random * 0.1;
+                setVendor(node, 'Transform','translate3d('  + (circleCoord.x - node.offsetWidth/2) + 'px,' + (circleCoord.y - node.offsetHeight/2) +'px,0) scale(' + (1 + (random * 1.2)) + ')');
+                if(node.className.indexOf('fadein') == -1) node.className += ' fadein';
+                theta += (6.283 / (nodesOnCircle + 1)) + ((random * 0.2) - 0.1);
                 if(nodes.length == 0) return;
             }
 
-            radius += interCircleDistance + Math.max(bodyWidth, bodyHeight) / 100;
+            radius += interCircleDistance;
             theta = random * 6.283;
         }
     };

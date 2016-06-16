@@ -8,7 +8,7 @@
 html,
 body {
   color: palette(Grey,200);
-  webkit-font-smoothing: antialiased;
+  -webkit-font-smoothing: antialiased;
   font-family: "Open Sans", Roboto, Helvetica, Arial, sans-serif !important;
 }
 
@@ -34,7 +34,7 @@ body {
 
 h1 {
   font-weight: 300;
-  font-size: 3em;
+  font-size: 3.5em;
   margin: 0;
 }
 
@@ -84,11 +84,11 @@ p {
 }
 
 .implode {
-  animation: fadeout 2s ease-in-out 0.1s forwards;
+  animation: implode 2s ease-in-out 0.1s forwards;
 }
 
 .explode {
-  animation: fadebackin 2s ease-in-out 0.1s forwards;
+  animation: explode 2s ease-in-out 0.1s forwards;
 }
 
 .colorshift {
