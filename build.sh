@@ -44,7 +44,7 @@ cp -R ${DIST_FOLDER}/* ../eliasmeire.github.io.${TARGET_BRANCH}
 cd ../eliasmeire.github.io.${TARGET_BRANCH}
 
 # git configuration
-git config user.email "eliasmeire.dbz@gmail.com"
+git config user.email "eliasmbot@gmail.com"
 git config user.name "Eliasbot"
 
 # add and commit
