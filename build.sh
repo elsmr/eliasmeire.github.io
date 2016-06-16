@@ -37,7 +37,7 @@ cd ../eliasmeire.github.io
 # build site, stored in dist folder
 gulp build
 
-# copy dist folder to new folder
+# copy dist folder to target folder
 cp -R ${DIST_FOLDER}/* ../eliasmeire.github.io.${TARGET_BRANCH}
 
 # go to target folder
