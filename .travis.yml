@@ -1,11 +1,11 @@
 language: ruby
 rvm:
 - 2.2 # Ruby version
-node_js:
-- 5
 
 install:
   - gem install jekyll
+  - nvm install 5.10
+  - nvm use 5.10  
   - npm install
 script: "./build.sh"
 
