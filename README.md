@@ -1,11 +1,14 @@
-# Personal website made with Jekyll
+# Personal website made with Jekyll 
+[![Build Status](https://travis-ci.org/eliasmeire/eliasmeire.github.io.svg?branch=develop)](https://travis-ci.org/eliasmeire/eliasmeire.github.io) ![](https://david-dm.org/eliasmeire/eliasmeire.github.io.svg)
 
-See it live at https://eliasmei.re
+See it live: https://eliasmei.re
 
 ## Build instructions
 
-in the cloned folder run:
+clone the repository and run the following commands
 
-`npm install`
-
-`gulp`
+```shell
+gem install jekyll
+npm install
+gulp
+```
