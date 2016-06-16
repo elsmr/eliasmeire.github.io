@@ -22,6 +22,7 @@ var paths    = {
     js: '_js/**/*.js',
     purify_src: ['_site/*.html','_site/js/scripts.min.js'],
     images: '_images/**/*.+(png|jpg|jpeg|gif|svg)',
+    mdi: 'node_modules/mdi/fonts/**/*',
     dist: '_site'
 }
 var messages = {
@@ -43,6 +44,14 @@ gulp.task('jekyll-build', function (done) {
  */
 gulp.task('reload', function () {
     browserSync.reload();
+});
+
+/**
+ * Copy iconfont
+ */
+gulp.task('copy-iconfont', function () {
+  return gulp.src(paths.mdi)
+    .pipe(gulp.dest(paths.dist + '/fonts'));
 });
 
 /**
@@ -124,5 +133,5 @@ gulp.task('clean', function () {
  * compile the jekyll site, launch BrowserSync & watch files.
  */
 gulp.task('default', function() {
-    runSequence('clean','jekyll-build', 'js', ['images', 'sass', 'browser-sync'], 'watch');
+    runSequence('clean','jekyll-build', 'js', ['copy-iconfont', 'images', 'sass', 'browser-sync'], 'watch');
 });
