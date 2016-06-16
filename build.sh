@@ -18,16 +18,16 @@ set -e
 gulp build
 
 # clean
-rm -rf ../eliasmeire.github.io.${TARGET_BRANCH}
+rm -rf ../eliasmeire.github.io.target
 
 # make new folder for generated files
-mkdir ../eliasmeire.github.io.${TARGET_BRANCH}
+mkdir ../eliasmeire.github.io.target
 
 # copy dist folder to new folder
-cp -R ${DIST_FOLDER}/* ../eliasmeire.github.io.${TARGET_BRANCH}
+cp -R _site/* ../eliasmeire.github.io.target
 
 # go to new folder
-cd ../eliasmeire.github.io.${TARGET_BRANCH}
+cd ../eliasmeire.github.io.target
 
 # git configuration
 git config user.email "eliasmeire.dbz@gmail.com"
