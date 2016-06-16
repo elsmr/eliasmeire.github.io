@@ -7,6 +7,8 @@ See it live: https://eliasmei.re
 
 clone the repository and run the following commands
 
-`gem install jekyll # if needed`
-`npm install`
-`gulp`
+```shell
+gem install jekyll
+npm install
+gulp
+```
