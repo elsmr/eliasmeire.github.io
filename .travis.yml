@@ -1,6 +1,6 @@
 language: ruby
 rvm:
-- 2.3 # Ruby version
+- 2.2 # Ruby version
 
 install:
   - gem install jekyll
