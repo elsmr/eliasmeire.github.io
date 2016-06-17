@@ -1,5 +1,5 @@
 # Personal website made with Jekyll 
-[![Build Status](https://travis-ci.org/eliasmeire/eliasmeire.github.io.svg?branch=develop)](https://travis-ci.org/eliasmeire/eliasmeire.github.io) ![](https://david-dm.org/eliasmeire/eliasmeire.github.io.svg)
+[![Build Status](https://api.travis-ci.org/eliasmeire/eliasmeire.github.io.svg?branch=develop)](https://travis-ci.org/eliasmeire/eliasmeire.github.io) ![](https://david-dm.org/eliasmeire/eliasmeire.github.io.svg)
 
 See it live: https://eliasmei.re
 
