@@ -14,7 +14,7 @@ var mdl = require('material-design-lite');
         bodyHeight = document.body.offsetHeight;
         exploded = true;
 
-        document.getElementById('content').className += ' fadein';
+        document.getElementById('content').classList.add('fadein');
 
         document.getElementById('implodeexplode').addEventListener('click', function() {
             if(exploded) {                
@@ -66,16 +66,18 @@ var mdl = require('material-design-lite');
     var implodeIcons = function() {
         for (var i = icons.length - 1; i >= 0; i--) {
             icons[i].style.opacity = 1;
-            icons[i].className = icons[i].className.replace(/\b fadein\b/,'').replace(/\b implode\b/,'').replace(/\b explode\b/,'');
-            icons[i].className += ' implode';
+            icons[i].classList.remove('fadein');
+            icons[i].classList.remove('explode');
+            icons[i].classList.add('implode');
         }
     }
 
     var explodeIcons = function() {
         for (var i = icons.length - 1; i >= 0; i--) {
             icons[i].style.opacity = 0;
-            icons[i].className = icons[i].className.replace(/\b fadein\b/,'').replace(/\b implode\b/,'').replace(/\b explode\b/,'');
-            icons[i].className += ' explode';
+            icons[i].classList.remove('fadein');
+            icons[i].classList.remove('implode');
+            icons[i].classList.add('explode');
         }
     }
 
@@ -137,16 +139,18 @@ var mdl = require('material-design-lite');
             if(nodesOnCircle > nodes.length) nodesOnCircle = nodes.length;
 
             for (var i =  nodesOnCircle; i >= 0; i--) {
-                random = Math.random();
-                node = [].pop.call(nodes);
-                circleCoord = circleCoords(radius, theta);
+                if(nodes.length == 0) return;
 
-                transform = 'translate3d('  + (circleCoord.x - node.offsetWidth/2) + 'px,' + (circleCoord.y - node.offsetHeight/2) +'px,0px) scale(' + (1 + (random * 1.2)) + ')';
+                node = [].pop.call(nodes);
+                random = Math.random();
+                circleCoord = circleCoords(radius, theta);
+                transform = 'translate3d('  + (circleCoord.x - node.offsetWidth/2) + 'px,' + (circleCoord.y - node.offsetHeight/2) +'px,0) scale(' + (1 + (random * 1.2)) + ')';
+                
                 node.style.transform = transform;
                 setVendor(node, 'Transform', transform);
-                if(node.className.indexOf('fadein') == -1) node.className += ' fadein';
+                if(!node.classList.contains('fadein')) node.classList.add('fadein');
+
                 theta += (6.283 / (nodesOnCircle + 1)) + ((random * 0.2) - 0.1);
-                if(nodes.length == 0) return;
             }
 
             radius += interCircleDistance;
