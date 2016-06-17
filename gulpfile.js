@@ -39,6 +39,15 @@ gulp.task('jekyll-build', function (done) {
         .on('close', done);
 });
 
+
+/**
+ * Clean the Jekyll Site
+ */
+gulp.task('jekyll-clean', function (done) {
+    return cp.spawn(jekyll , ['clean'], {stdio: 'inherit'})
+        .on('close', done);
+});
+
 /**
  * Reload browser sync
  */
@@ -121,10 +130,11 @@ gulp.task('watch', function () {
 });
 
 /**
- * Clean project (delete _site folder etc.)
+ * Clean project (delete _site folder, node_modules etc.)
  */
 gulp.task('clean', function () {
     browserSync.notify(messages.clean);
+    cp.spawn('rm' , ['-rf', './node_modules'], {stdio: 'inherit'});
     return cp.spawn(jekyll , ['clean'], {stdio: 'inherit'});
 });
 
@@ -132,7 +142,7 @@ gulp.task('clean', function () {
  * Build project (without browser-sync/watch)
  */
 gulp.task('build', function() {
-    runSequence('clean','jekyll-build', 'js', ['copy-iconfont', 'images', 'sass']);
+    runSequence('jekyll-clean','jekyll-build', 'js', ['copy-iconfont', 'images', 'sass']);
 });
 
 /**
@@ -140,5 +150,5 @@ gulp.task('build', function() {
  * compile the jekyll site, launch BrowserSync & watch files.
  */
 gulp.task('default', function() {
-    runSequence('clean','jekyll-build', 'js', ['copy-iconfont', 'images', 'sass', 'browser-sync'], 'watch');
+    runSequence('jekyll-clean','jekyll-build', 'js', ['copy-iconfont', 'images', 'sass', 'browser-sync'], 'watch');
 });
