@@ -9,6 +9,7 @@ email: me@eliasmei.re
 github_username: eliasmeire
 primary_color: '#212121'
 
+# Export favicons to site root
 collections:
   favicon:
     output: true
@@ -23,3 +24,4 @@ exclude:
   - package.json
   - gulpfile.js
   - build.sh
+  - node_modules/
