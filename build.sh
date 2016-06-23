@@ -60,4 +60,4 @@ git add -A .
 git commit -am "Build from ${SOURCE_BRANCH} branch | Deployed by TravisCI (Build #$TRAVIS_BUILD_NUMBER)"
 
 # force push to github
-git push -f "https://${GH_TOKEN}@${GH_REF}" ${TARGET_BRANCH} > /dev/null 2>&1
+git push -f "https://${GH_TOKEN}@${GH_REF}" ${TARGET_BRANCH}
