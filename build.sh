@@ -6,10 +6,10 @@ GH_REF="github.com/eliasmeire/eliasmeire.github.io"
 DIST_FOLDER="_site"
 
 # only proceed script when started not by pull request (PR)
-if [ $TRAVIS_PULL_REQUEST == "true" ]; then
-  echo "this is a PR, exiting"
-  exit 0
-fi
+# if [ $TRAVIS_PULL_REQUEST == "true" ]; then
+#   echo "this is a PR, exiting"
+#   exit 0
+# fi
 
 # enable error reporting to the console
 set -e
