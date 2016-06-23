@@ -6,10 +6,10 @@ GH_REF="github.com/eliasmeire/eliasmeire.github.io"
 DIST_FOLDER="_site"
 
 # only proceed script when started not by pull request (PR)
-if [ $TRAVIS_PULL_REQUEST == "true" ]; then
-  echo "this is a PR, exiting"
-  exit 0
-fi
+# if [ $TRAVIS_PULL_REQUEST == "true" ]; then
+#   echo "this is a PR, exiting"
+#   exit 0
+# fi
 
 # enable error reporting to the console
 set -e
@@ -51,13 +51,13 @@ git config user.name "Eliasbot"
 git add -A .
 
 # If there are no changes to the compiled _site (e.g. this is a README update) then just bail.
-if [ -z `git diff --cached --exit-code` ]; then
-    echo "No changes to the output on this push; exiting."
-    exit 0
-fi
+# if [ -z `git diff --cached --exit-code` ]; then
+#     echo "No changes to the output on this push; exiting."
+#     exit 0
+# fi
 
 # commit files
 git commit -am "Build from ${SOURCE_BRANCH} branch | Deployed by TravisCI (Build #$TRAVIS_BUILD_NUMBER)"
 
 # force push to github
-git push -f "https://${GH_TOKEN}@${GH_REF}" ${TARGET_BRANCH} > /dev/null 2>&1
+git push -f "https://${GH_TOKEN}@${GH_REF}" ${TARGET_BRANCH}
