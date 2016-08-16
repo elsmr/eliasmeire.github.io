@@ -7,8 +7,7 @@
   left: 0;
   right: 0;  
   .mdi {
-    font-size: 4em;    
-    transition: all 1.5s ease-in-out;
+    font-size: 4em;
     transform: translate3d(0,0,0); // hardware acceleration (GPU)
     -webkit-font-smoothing: subpixel-antialiased;
     position: absolute;

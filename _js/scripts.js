@@ -15,6 +15,7 @@ var mdl = require('material-design-lite');
         exploded = true;
 
         positionIcons();
+        explodeIcons();
 
         document.getElementById('implodeexplode').addEventListener('click', function() {
             if(exploded) {                
@@ -98,6 +99,7 @@ var mdl = require('material-design-lite');
       node.style["moz" + property] = value;
       node.style["ms" + property] = value;
       node.style["o" + property] = value;
+      node.style[property] = value;
     }
 
     /**
@@ -139,6 +141,7 @@ var mdl = require('material-design-lite');
      */
     var positionNodesCircles = function(nodes, radius, nodesPerCircle, nodesPerCircleRandom, interCircleDistance) {
         var node, nodesOnCircle, circleCoord, transform, random, theta = 0;
+        console.log('calcing');
 
         while(nodes.length > 0) {
             nodesOnCircle = nodesPerCircle + Math.random() * nodesPerCircleRandom;
@@ -152,8 +155,8 @@ var mdl = require('material-design-lite');
                 circleCoord = circleCoords(radius, theta);
                 transform = 'translate3d('  + Math.round(circleCoord.x - node.offsetWidth/2) + 'px,' + Math.round(circleCoord.y - node.offsetHeight/2) +'px,0) scale(' + Math.round((0.8 + (random * 0.2)) * 10) / 10 + ')';
                 
-                node.style.transform = transform;
                 setVendor(node, 'Transform', transform);
+                setVendor(node, 'Transition', 'transform 1.5s ease-in-out')
 
                 theta += (6.283 / (nodesOnCircle + 1)) + ((random * 0.2) - 0.1);
             }
