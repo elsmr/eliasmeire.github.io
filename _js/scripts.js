@@ -14,7 +14,7 @@ var mdl = require('material-design-lite');
         bodyHeight = document.body.offsetHeight;
         exploded = true;
 
-        document.getElementById('content').classList.add('fadein');
+        positionIcons();
 
         document.getElementById('implodeexplode').addEventListener('click', function() {
             if(exploded) {                
@@ -33,18 +33,28 @@ var mdl = require('material-design-lite');
 
             exploded = !exploded;
         });
+
+        icons[0].addEventListener('animationend', function() {
+            for (var i = icons.length - 1; i >= 0; i--) {
+                if(icons[i].classList.contains('implode')) {
+                    icons[i].style.opacity = 0;
+                    icons[i].classList.remove('implode');
+                } else if(icons[i].classList.contains('explode')) {
+                    icons[i].style.opacity = 1;
+                    icons[i].classList.remove('explode');
+                }
+            }
+        });
         
 
-        // var ghosts = [].slice.call(document.querySelectorAll('.mdi-ghost'));
-        // ghosts.forEach(function (ghost) {
-        //     ghost.addEventListener('click', function(e) {
-        //         this.style.animation += ', colorshift 5s infinite';
-        //         this.style.cursor = 'default';
-        //         e.target.removeEventListener(e.type, null);
-        //     });
-        // });
-
-        positionIcons();
+        var ghosts = [].slice.call(document.querySelectorAll('.mdi-ghost'));
+        ghosts.forEach(function (ghost) {
+            ghost.addEventListener('click', function(e) {
+                console.log('click');
+                this.classList.contains('colorshift') ? this.classList.remove('colorshift') : this.classList.add('colorshift');
+                e.target.removeEventListener(e.type, null);
+            });
+        });
     });
 
     window.addEventListener('resize',function() {
@@ -65,17 +75,13 @@ var mdl = require('material-design-lite');
 
     var implodeIcons = function() {
         for (var i = icons.length - 1; i >= 0; i--) {
-            icons[i].style.opacity = 1;
-            icons[i].classList.remove('fadein');
             icons[i].classList.remove('explode');
-            icons[i].classList.add('implode');
+            icons[i].classList.add('implode');            
         }
     }
 
     var explodeIcons = function() {
         for (var i = icons.length - 1; i >= 0; i--) {
-            icons[i].style.opacity = 0;
-            icons[i].classList.remove('fadein');
             icons[i].classList.remove('implode');
             icons[i].classList.add('explode');
         }
@@ -127,7 +133,7 @@ var mdl = require('material-design-lite');
      * @param {object} nodes - The nodeList that needs to be laid out in circles.
      * @param {number} radius - The radius of the smallest circle.
      * @param {object} middlepoint - The middlepoint (x,y).
-     * @param {number} nodesPerCircle - The amount of node per circle.
+     * @param {number} nodesPerCircle - The amount of nodes per circle.
      * @param {number} nodesPerCircleRandom - The random factor for the number of nodes per circle.
      * @param {number} interCircleDistance - The distance between two circles.
      */
@@ -144,11 +150,10 @@ var mdl = require('material-design-lite');
                 node = [].pop.call(nodes);
                 random = Math.random();
                 circleCoord = circleCoords(radius, theta);
-                transform = 'translate3d('  + (circleCoord.x - node.offsetWidth/2) + 'px,' + (circleCoord.y - node.offsetHeight/2) +'px,0) scale(' + (1 + (random * 1.2)) + ')';
+                transform = 'translate3d('  + Math.round(circleCoord.x - node.offsetWidth/2) + 'px,' + Math.round(circleCoord.y - node.offsetHeight/2) +'px,0) scale(' + Math.round((0.8 + (random * 0.2)) * 10) / 10 + ')';
                 
                 node.style.transform = transform;
                 setVendor(node, 'Transform', transform);
-                if(!node.classList.contains('fadein')) node.classList.add('fadein');
 
                 theta += (6.283 / (nodesOnCircle + 1)) + ((random * 0.2) - 0.1);
             }

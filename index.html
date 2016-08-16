@@ -4,14 +4,6 @@ layout: default
 ---
 
 <div class="wrapper">
-    <div class="icon-canvas">
-        {% for icon in site.data.icons %}
-            {% for i in (1..icon.quantity) %}
-              <i class="mdi mdi-{{ icon.icon }}"></i>
-            {% endfor %}
-        {% endfor %}
-    </div>
-
     <div class="header">
         <button id="demo-menu-lower-right" class="mdl-button mdl-js-button mdl-button--icon">
           <i class="mdi mdi-dots-vertical"></i>
@@ -23,7 +15,7 @@ layout: default
         </ul>
     </div>
 
-    <div id="content" class="content">
+    <div id="content" class="content fadein">
         <h1>{{ site.title }}</h1>
         <p>IT Student and (frontend) Webdeveloper.</p>
         <ul class="socialicons">
@@ -53,5 +45,13 @@ layout: default
                 </div>
             </li>
         </ul>
+    </div>
+
+    <div class="icon-canvas">
+        {% for icon in site.data.icons %}
+            {% for i in (1..icon.quantity) %}
+              <i class="mdi mdi-{{ icon.icon }} explode"></i>
+            {% endfor %}
+        {% endfor %}
     </div>
 </div>

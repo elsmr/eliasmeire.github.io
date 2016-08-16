@@ -1,19 +1,17 @@
 .icon-canvas {
   position: fixed;
   background-color: palette(Grey, 900);
+  overflow: hidden;
   top: 0;
   bottom: 0;
   left: 0;
-  right: 0;
-  
+  right: 0;  
   .mdi {
-    font-size: 2em;
-    -webkit-perspective: 1000; // fix bluryness (maybe)
+    font-size: 4em;    
     transition: all 1.5s ease-in-out;
     transform: translate3d(0,0,0); // hardware acceleration (GPU)
     -webkit-font-smoothing: subpixel-antialiased;
     position: absolute;
-    opacity: 0;
     top: 50%;
     left: 50%;
   }
@@ -80,6 +78,9 @@
   }
   .mdi-rocket {
     color: palette(Blue, A700);
+  }
+  .mdi-ghost {
+    cursor: pointer;
   }
 }
 
