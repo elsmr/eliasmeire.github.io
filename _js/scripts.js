@@ -77,6 +77,7 @@ var mdl = require('material-design-lite');
     var implodeIcons = function() {
         for (var i = icons.length - 1; i >= 0; i--) {
             icons[i].classList.remove('explode');
+            icons[i].classList.remove('colorshift');
             icons[i].classList.add('implode');            
         }
     }
