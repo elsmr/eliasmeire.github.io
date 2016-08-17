@@ -99,7 +99,6 @@ var mdl = require('material-design-lite');
       node.style["moz" + property] = value;
       node.style["ms" + property] = value;
       node.style["o" + property] = value;
-      node.style[property] = value;
     }
 
     /**
@@ -155,8 +154,10 @@ var mdl = require('material-design-lite');
                 circleCoord = circleCoords(radius, theta);
                 transform = 'translate3d('  + Math.round(circleCoord.x - node.offsetWidth/2) + 'px,' + Math.round(circleCoord.y - node.offsetHeight/2) +'px,0) scale(' + Math.round((0.8 + (random * 0.2)) * 10) / 10 + ')';
                 
+                node.style.transition = 'transform 1.5s ease-in-out';
+                setVendor(node, 'Transition', 'transform 1.5s ease-in-out');
+                node.style.transform = transform;
                 setVendor(node, 'Transform', transform);
-                setVendor(node, 'Transition', 'transform 1.5s ease-in-out')
 
                 theta += (6.283 / (nodesOnCircle + 1)) + ((random * 0.2) - 0.1);
             }
