@@ -98,7 +98,7 @@ var mdl = require('material-design-lite');
         }
       }
     }
-    return 'transform';
+    return prop.toLowerCase();
   }
 
     /**
