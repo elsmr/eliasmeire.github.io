@@ -4,8 +4,8 @@ rvm:
 
 install:
   - gem install jekyll
-  - nvm install 5.10
-  - nvm use 5.10  
+  - nvm install 6.9.1
+  - nvm use 6.9.1  
   - npm install
 script: "./build.sh"
 
