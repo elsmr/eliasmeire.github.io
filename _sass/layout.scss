@@ -50,10 +50,15 @@ p {
   justify-content: center;
   align-items: center;
   text-align: center;
+  a {
+    display: block;
+  }
   .mdi {
-    text-align: center;
+    width: 2em;
+    height: 2em;
     font-size: 1.5em;
-    padding: 0.4em;
+    line-height: 2em;
+    display: block;
     border-radius: 50%;
     background-color: palette(Grey, 200);
     color: palette(Grey, 900);
@@ -65,11 +70,6 @@ p {
 
   li + li {
     margin-left: 0.5em;
-  }
-
-  .mdi-github-circle {
-    font-size: 2em;
-    padding: 0.2em;
   }
 }
 
